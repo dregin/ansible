@@ -1,0 +1,16 @@
+---
+host: $inventory_hostname
+project_name: docker-registry
+project_root: /home/ansible/
+py_requirements: /home/ansible/docker-registry/requirements.txt
+system_packages:
+    -   git
+    -   python-pip
+    -   libselinux-python
+    -   gcc        
+    -   python-devel
+    -   libevent
+    -   libevent-devel
+    -   pyOpenSSL
+initfiles:
+    -   gunicorn
