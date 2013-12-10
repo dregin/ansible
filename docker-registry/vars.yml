@@ -1,8 +1,8 @@
 ---
 host: $inventory_hostname
 project_name: docker-registry
-project_root: /home/ansible/
-py_requirements: /home/ansible/docker-registry/requirements.txt
+project_root: /opt/
+py_requirements: "{{ project_root }}docker-registry/requirements.txt"
 system_packages:
     -   git
     -   python-pip

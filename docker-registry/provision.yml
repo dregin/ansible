@@ -8,17 +8,17 @@
 
     tasks:
     -   name: Downloading and enable the EPEL repository definitions.
-        action: command rpm -Uvh --replacepkgs http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+        yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
 
     -   name: ensure app dependencies are installed for docker-registry
-        action: yum pkg={{ item }} state=installed
+        yum: name={{ item }} state=installed
         with_items: ${system_packages}
     
     -   name: get docker-registry repo
-        action: git repo=https://github.com/dotcloud/docker-registry.git dest={{ project_root }}/docker-registry/
+        git: repo=https://github.com/dotcloud/docker-registry.git dest={{ project_root }}/docker-registry/
 
     -   name: use sample docker-registry config
-        action: shell cd docker-registry && cp config_sample.yml config.yml
+        shell: chdir={{ project_root }}docker-registry/config/ cp config_sample.yml config.yml
 
     -   name: Install python packages
         pip: requirements={{ py_requirements }}
@@ -28,8 +28,8 @@
         notify:
             - restart gunicorn
 
-    -   name: Let inotify know about the new init conf
-        action: shell touch /etc/init/*
+#    -   name: Let inotify know about the new init conf
+#        action: shell touch /etc/init/*
 
     -   name: restart gunicorn
         service:  name=gunicorn-{{ host }} state=restarted
