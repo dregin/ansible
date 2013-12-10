@@ -9,10 +9,21 @@
     tasks:
     -   name: Downloading and enable the EPEL repository definitions.
         yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+        when: ansible_distribution == 'CentOS'
 
-    -   name: ensure app dependencies are installed for docker-registry
+    -   name: ensure CentOS app dependencies are installed for docker-registry
         yum: name={{ item }} state=installed
-        with_items: ${system_packages}
+        with_items: 
+            -   ${common_packages}
+            -   ${centos_packages}
+        when: ansible_distribution == 'CentOS'
+
+    -   name: ensure Ubuntu app dependencies are installed for docker-registry
+        apt: name={{ item }} state=installed
+        with_items: 
+            -   ${common_packages}
+            -   ${ubuntu_packages}
+        when: ansible_distribution == 'Ubuntu'
     
     -   name: get docker-registry repo
         git: repo=https://github.com/dotcloud/docker-registry.git dest={{ project_root }}/docker-registry/

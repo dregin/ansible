@@ -3,14 +3,21 @@ host: $inventory_hostname
 project_name: docker-registry
 project_root: /opt/
 py_requirements: "{{ project_root }}docker-registry/requirements.txt"
-system_packages:
+common_packages:
     -   git
     -   python-pip
-    -   libselinux-python
     -   gcc        
+ubuntu_packages:
+    -   python-selinux
+    -   python-dev
+    -   libevent-2.0-5
+    -   libevent-dev
+    -   python-openssl
+centos_packages:
+    -   libevent-devel
+    -   libselinux-python
     -   python-devel
     -   libevent
-    -   libevent-devel
     -   pyOpenSSL
 initfiles:
     -   gunicorn
