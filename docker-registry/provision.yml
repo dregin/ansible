@@ -29,7 +29,7 @@
         git: repo=https://github.com/dotcloud/docker-registry.git dest={{ project_root }}/docker-registry/
 
     -   name: use sample docker-registry config
-        shell: chdir={{ project_root }}docker-registry/config/ cp config_sample.yml config.yml
+        shell: chdir={{ project_root }}/docker-registry/config/ cp config_sample.yml config.yml
 
     -   name: Install python packages
         pip: requirements={{ py_requirements }}
@@ -38,9 +38,6 @@
         template: src=./gunicorn-upstart.conf.j2 dest=/etc/init/gunicorn-{{ host }}.conf
         notify:
             - restart gunicorn
-
-#    -   name: Let inotify know about the new init conf
-#        action: shell touch /etc/init/*
 
     -   name: restart gunicorn
         service:  name=gunicorn-{{ host }} state=restarted

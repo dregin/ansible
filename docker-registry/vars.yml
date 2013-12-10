@@ -1,8 +1,8 @@
 ---
 host: $inventory_hostname
 project_name: docker-registry
-project_root: /opt/
-py_requirements: "{{ project_root }}docker-registry/requirements.txt"
+project_root: /opt
+py_requirements: "{{ project_root }}/docker-registry/requirements.txt"
 common_packages:
     -   git
     -   python-pip

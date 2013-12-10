@@ -7,6 +7,6 @@ stop on runlevel [016]
 respawn
 
 script
-    cd /home/ansible/docker-registry/
+    cd {{ project_root }}/docker-registry/
     exec gunicorn --access-logfile - --log-level debug --debug -b 0.0.0.0:5000 -w 1 wsgi:application
 end script
