@@ -1,0 +1,5 @@
+---
+- name: Install mdadm
+  apt:
+    name: mdadm
+    state: latest

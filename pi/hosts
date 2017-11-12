@@ -1,0 +1,2 @@
+[pi]
+192.168.1.146 ssh_user=pi ansible_user=pi
