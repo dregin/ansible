@@ -1,0 +1,23 @@
+- hosts: pi
+  gather_facts: True
+  become: True
+  roles:
+    - role: supervisord
+      supervisor_version: latest
+      supervisor_started: true
+      supervisor_enabled: true
+      supervisor_programs:
+        - name: 'deluged'
+          command: /usr/bin/deluged -d -L warning
+          state: present
+          configuration: |
+            user=dregin
+            autorestart=true
+            priority=100
+        - name: 'deluge-web'
+          command: /usr/bin/deluge-web -L warning
+          state: present
+          configuration: |
+            user=dregin
+            autorestart=true
+            priority=200

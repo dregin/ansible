@@ -1,0 +1,19 @@
+---
+- name: Install plex dependencies
+  apt:
+    name: apt-transport-https
+    state: latest
+- name: Add plex repo key
+  apt_key:
+    url: https://dev2day.de/pms/dev2day-pms.gpg.key
+    state: present
+
+- name: Add plex repo
+  apt_repository:
+    repo: deb https://dev2day.de/pms/ jessie main
+    state: present
+
+- name: Install plex
+  apt:
+    name: plexmediaserver
+    update_cache: yes

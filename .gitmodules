@@ -1,0 +1,3 @@
+[submodule "pi/roles/deluge"]
+	path = pi/roles/deluge
+	url = git@github.com:danvaida/ansible-role-deluge.git

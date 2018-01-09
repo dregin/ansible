@@ -1,0 +1,13 @@
+- hosts: pi
+  gather_facts: False
+  become: True
+  roles:
+    - role: deluge
+      deluge_web: True
+      deluge_users_to_add:
+        - name: dregin
+          password: dreginpassword
+          access_level: 10
+      deluge_users_to_remove:
+        - usertwo
+      deluge_download_location: '/mnt/raid/torrents/'

@@ -1,0 +1,6 @@
+---
+- name: Create user
+  user:
+    name: dregin
+    groups: adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,spi,i2c,gpio
+    shell: /bin/bash
